@@ -1,7 +1,7 @@
 import random
 from collections import Counter
 from typing import *
-
+from . import eco
 import discord
 from cassiopeia import riotapi
 from cassiopeia.type.core.common import Map
@@ -88,12 +88,18 @@ class Question(object):
                 break
         else:
             return False
+        soulsToAward: int = 2000
+
+        bal: int = eco.gbal(message.author.id)
+        eco.award(message.author.id, soulsToAward)
 
         self.active = False
         points: int = config['trivia']['points']
         await client.send_message(message.channel,
                                   f"Correct answer '{ans}'{self.extra} by {message.author.mention}! +{points} points"
-                                  f" (new score: {(get_score(message.author.id) or 0) + points})")
+                                  f" (new score: {(get_score(message.author.id) or 0) + points})"
+                                  f" +{soulsToAward} :ghost: (new bal: {bal + soulsToAward})"
+                                  )
         return points
 
     def set_thumbnail(self, *args, **kwargs) -> 'Question':
