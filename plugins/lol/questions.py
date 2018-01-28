@@ -88,7 +88,7 @@ class Question(object):
                 break
         else:
             return False
-        soulsToAward: int = 2000
+        soulsToAward: int = 75
 
         bal: int = eco.gbal(message.author.id)
         eco.award(message.author.id, soulsToAward)
