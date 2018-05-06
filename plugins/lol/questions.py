@@ -88,7 +88,7 @@ class Question(object):
                 break
         else:
             return False
-        soulsToAward: int = 75
+        soulsToAward: int = 370
 
         bal: int = eco.gbal(message.author.id)
         eco.award(message.author.id, soulsToAward)
@@ -98,7 +98,7 @@ class Question(object):
         await client.send_message(message.channel,
                                   f"Correct answer '{ans}'{self.extra} by {message.author.mention}! +{points} points"
                                   f" (new score: {(get_score(message.author.id) or 0) + points})"
-                                  f" +{soulsToAward} :ghost: (new bal: {bal + soulsToAward})"
+                                  f" +{soulsToAward} <a:sugargif:408339899163344896> (new bal: {bal + soulsToAward})"
                                   )
         return points
 
